@@ -1,0 +1,42 @@
+# ============================================================
+# PSF-Architectural-Analyzer — Python Dependencies
+# Tested: Python 3.10+ / CUDA 12.x (RTX-class GPU recommended)
+# ============================================================
+
+# ── Core Deep Learning ────────────────────────────────────────
+torch>=2.1.0
+torchvision>=0.16.0
+timm>=0.9.12
+
+# ── Metrics & Statistics ──────────────────────────────────────
+torchmetrics>=1.2.0
+pingouin>=0.5.3
+scipy>=1.11.0
+statsmodels>=0.14.0
+
+# ── Data & Visualisation ──────────────────────────────────────
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+scikit-learn>=1.3.0
+plotly>=5.15.0
+
+# ── Dashboard ─────────────────────────────────────────────────
+gradio>=4.0.0
+
+# ── Config ────────────────────────────────────────────────────
+pyyaml>=6.0
+
+# ── Experiment Logging (optional) ─────────────────────────────
+# Set WANDB_API_KEY env-var to enable automatic W&B logging.
+wandb>=0.15.0
+tensorboard>=2.14.0
+
+# ── Hyperparameter Optimisation (optional) ────────────────────
+optuna>=3.3.0
+
+# ── Utilities ─────────────────────────────────────────────────
+tqdm>=4.65.0

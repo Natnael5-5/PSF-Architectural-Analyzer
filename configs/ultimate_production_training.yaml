@@ -1,0 +1,91 @@
+# ============================================================
+# PSF DINOv2 Fine-Tuning – ULTIMATE PRODUCTION CONFIGURATION
+# ============================================================
+# This pipeline uses 100% of the dataset (no validation split) and 
+# aggressively unfreezes the DINOv2 backbone to minimize bias 
+# and maximize accuracy for the final production deployment.
+
+# ----- Data -----
+data:
+  root: "."
+  image_dir: "Renamed Images"
+  labels_csv: "labels.csv"
+  image_col: "Name"
+  label_cols: ["Creativity", "Belonging", "EaseOfUse"]
+  image_ext: ".png"
+  val_split: 0.00                  # 100% TRAINING - NO VALIDATION SPLIT!
+  img_size: 518                    # DINOv2 native resolution
+
+# ----- Model -----
+model:
+  backbone: "vit_base_patch14_dinov2"
+  pretrained: true
+  embed_dim: 768
+  head_hidden: 512                 # Wider head for higher capacity
+  dropout: 0.2                     # Reduced dropout since we use all data
+  num_outputs: 3
+
+# ----- Training -----
+train:
+  seed: 2026
+  deterministic: true
+  
+  # Phase 1 – Stabilise Head (Frozen Backbone)
+  freeze_epochs: 15
+  lr_head: 3.0e-4
+  
+  # Phase 2 – Deep Fine-Tuning (Aggressive Unfreeze)
+  finetune_epochs: 300             # Maximize training time
+  lr_finetune: 6.0e-5              
+  unfreeze_blocks: 8               # Unfreeze 8 out of 12 blocks (Deepest tweak)
+  
+  # Common Hyperparameters
+  batch_size: 4                    # Must stay at 4 for RTX 4050 6GB VRAM
+  num_workers: 4
+  weight_decay: 0.05
+  
+  # Scheduler
+  scheduler: "cosine"
+  warmup_epochs: 5
+  min_lr: 5.0e-7
+  
+  # Early stopping (disabled effectively since validation MAE is 0)
+  patience: 300                    
+  amp: true                        
+
+# ----- Augmentation (HEAVY) -----
+augmentation:
+  enabled: true
+  random_resized_crop:
+    scale: [0.6, 1.0]              # More scale variation
+  horizontal_flip_prob: 0.5
+  rotation_degrees: 20             
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+    hue: 0.05
+  gaussian_blur:
+    prob: 0.4
+    kernel_size: 3
+    sigma: [0.1, 2.0]
+  random_perspective:
+    prob: 0.3
+    distortion_scale: 0.5
+  random_affine:
+    prob: 0.3
+    degrees: 0
+    translate: [0.1, 0.1]
+    scale: [0.8, 1.2]
+
+# ----- Checkpointing -----
+checkpoint:
+  dir: "checkpoints/ultimate_production"
+  save_best: true
+  metric: "val_mae"
+
+# ----- Logging -----
+logging:
+  wandb: false
+  tensorboard: true
+  log_dir: "runs/ultimate_production"
