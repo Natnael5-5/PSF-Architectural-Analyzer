@@ -110,4 +110,12 @@ python model/predict.py --input "path/to/images_directory"
 
 ## License and Citation
 
-Please refer to the published thesis for comprehensive academic context, dataset methodologies, and theoretical frameworks regarding Perceived Spatial Functionality. If you utilize this code in your academic work, please cite the original research accordingly.
+### Dataset
+The architectural stimuli dataset utilized to train this model is publicly available on Zenodo. If you use the dataset, please cite it as follows:
+
+> Bahiru, N. W. (2026). *Dataset for: Image-Based Prediction of Perceived Spatial Functionality in Design Studios Using Deep Learning*. Zenodo. https://doi.org/10.5281/zenodo.20351102
+
+### Codebase & Thesis
+The source code in this repository is provided under the **MIT License**.
+
+The full thesis manuscript, *"Image-Based Prediction of Perceived Spatial Functionality in Design Studios Using Deep Learning"*, is currently pending publication. Until the official thesis is released, if you utilize this codebase or theoretical framework in your academic work, please cite this GitHub repository alongside the Zenodo dataset above.
