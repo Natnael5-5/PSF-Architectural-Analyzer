@@ -1,4 +1,5 @@
 # Image-Based Prediction of Perceived Spatial Functionality in Design Studios Using Deep Learning
+![PSF Dashboard Preview](docs/dashboard_preview.png)
 
 ## Overview
 
