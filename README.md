@@ -1,4 +1,6 @@
 # Image-Based Prediction of Perceived Spatial Functionality in Design Studios Using Deep Learning
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg) ![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg) ![Dataset](https://img.shields.io/badge/Dataset-Zenodo-blue.svg)
+
 ![PSF Dashboard Preview](/dashboard_preview.png)
 
 ## Overview
